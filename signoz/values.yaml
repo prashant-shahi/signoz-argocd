@@ -1,0 +1,33 @@
+global:
+  clusterName: my-cluster
+#   storageClass: standard
+
+signoz:
+  frontend:
+    image:
+      tag: 0.15.0
+  queryService:
+    image:
+      tag: 0.15.0
+  otelCollector:
+    image:
+      tag: 0.66.3
+  otelCollectorMetrics:
+    image:
+      tag: 0.66.3
+  clickhouse:
+    persistence:
+      size: 30Gi
+  k8s-infra:
+    presets:
+      logCollection:
+        enabled: true
+        blacklist:
+          enabled: true
+          signozLogs: false
+          namespaces:
+            - kube-system
+            - argocd
+            - cert-manager
+            - ingress-nginx
+            - platform
